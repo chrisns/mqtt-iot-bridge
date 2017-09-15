@@ -1,0 +1,23 @@
+version: "3"
+services:
+  bridge:
+    image: chrisns/chrisns/mqtt-iot-bridge:${DRONE_BUILD_NUMBER:-latest}
+    read_only: true
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 128M
+    environment:
+      - MQTT_PATH=${MQTT_PATH}
+      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+      - AWS_IOT_ENDPOINT_HOST=${AWS_IOT_ENDPOINT_HOST}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_SUBSCRIBE=${AWS_SUBSCRIBE}
+      - MQTT_SUBSCRIBE=${MQTT_SUBSCRIBE}
+      - MQTT_HOST=${MQTT_HOST}
+      - MQTT_USER=${MQTT_USER}
+      - MQTT_PASS=${MQTT_PASS}
