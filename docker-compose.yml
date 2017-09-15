@@ -1,7 +1,7 @@
 version: "3"
 services:
   bridge:
-    image: chrisns/chrisns/mqtt-iot-bridge:${DRONE_BUILD_NUMBER:-latest}
+    image: chrisns/mqtt-iot-bridge:${DRONE_BUILD_NUMBER:-latest}
     read_only: true
     deploy:
       replicas: 1
