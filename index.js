@@ -16,11 +16,11 @@ const mqttClient = mqtt.connect(MQTT_HOST, {
 })
 
 awsMqttClient.on('connect', () => {
-  awsMqttClient.subscribe(AWS_SUBSCRIBE);
+  awsMqttClient.subscribe(AWS_SUBSCRIBE, {qos: 1});
   console.log('AWS connected');
 });
 
-awsMqttClient.on('message', (topic, message) => mqttClient.publish(topic, message));
+awsMqttClient.on('message', (topic, message) => mqttClient.publish(topic, message, {qos: 2}));
 
 awsMqttClient.on('error', (error) => console.error("aws - error", error));
 
@@ -31,7 +31,7 @@ awsMqttClient.on('offline', (error) => console.error('aws -  offline', error));
 awsMqttClient.on('reconnect', (error) => console.log('aws - reconnect', error));
 
 mqttClient.on('connect', () => {
-  mqttClient.subscribe(MQTT_SUBSCRIBE)
+  mqttClient.subscribe(MQTT_SUBSCRIBE, {qos: 2})
   console.log("mqtt - connected")
 })
 
@@ -41,5 +41,5 @@ mqttClient.on('close', () => console.error("mqtt - close"))
 
 mqttClient.on('offline', () => console.log("mqtt - offline"))
 
-mqttClient.on('message', (topic, message) => awsMqttClient.publish(topic, message));
+mqttClient.on('message', (topic, message) => awsMqttClient.publish(topic, message, {qos: 1}));
 
