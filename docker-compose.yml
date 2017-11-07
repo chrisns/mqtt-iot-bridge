@@ -10,10 +10,8 @@ services:
           cpus: '0.40'
           memory: 128M
     environment:
-      - MQTT_PATH=${MQTT_PATH}
       - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
       - AWS_IOT_ENDPOINT_HOST=${AWS_IOT_ENDPOINT_HOST}
       - AWS_REGION=${AWS_REGION}
       - AWS_SUBSCRIBE=${AWS_SUBSCRIBE}
