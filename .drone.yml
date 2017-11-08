@@ -7,11 +7,5 @@ pipeline:
       - latest
       - ${DRONE_BUILD_NUMBER}
     secrets: [ docker_username, docker_password ]
-
-  deploy:
-    image: docker
-    secrets: [ MQTT_HOST, MQTT_USER, MQTT_PASS, MQTT_PATH, AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, AWS_IOT_ENDPOINT_HOST, AWS_REGION, AWS_SUBSCRIBE, MQTT_SUBSCRIBE ]
-    commands:
-      - docker deploy --compose-file docker-compose.yml iot-bridge
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      branch: master
